@@ -1,0 +1,67 @@
+﻿<Window x:Class="CommonCRUDClient.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:CommonCRUDClient"
+        Title="MainWindow" Height="380" Width="400" ResizeMode="NoResize">
+    <StackPanel Orientation="Vertical">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="C R U D" FontSize="18" Foreground="CadetBlue" FontWeight="Bold" />
+        </StackPanel>
+        <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel.Resources>
+                <Style TargetType="RadioButton">
+                    <Setter Property="Margin" Value="4"/>
+                    <Setter Property="Foreground" Value="Blue"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </Style>
+            </StackPanel.Resources>
+            <RadioButton Content="Create" TabIndex="0"/>
+            <RadioButton Content="Read" TabIndex="1"/>
+            <RadioButton Content="Update" TabIndex="2"/>
+            <RadioButton Content="Delete" TabIndex="3"/>
+        </StackPanel>
+        
+        <TabControl x:Name="TabCrud" Height="Auto" Margin="10">
+            <TabItem Header="Create" Name="CreateTabItem" IsSelected="True">
+                <GroupBox Margin="15,5,15,5" BorderBrush="Brown" BorderThickness="1" Header="Create or Update">
+                    <StackPanel Orientation="Vertical" Margin="10,5,10,5">
+                        <views:LabelWithTextbox Margin="2,4,2,2"/>
+                        <views:LabelWithTextbox Margin="2"/>
+                        <views:LabelWithTextbox Margin="2"/>
+                        <views:LabelWithTextbox Margin="2"/>
+                        <views:LabelWithTextbox Margin="2"/>
+                        <views:SaveCancelControl Margin="0,10,25,5"/>
+                    </StackPanel>
+                </GroupBox>
+            </TabItem>
+            <TabItem Header="Read" Name="ReadTabItem">
+                <GroupBox Margin="15,5,15,5" BorderBrush="Brown" BorderThickness="1" 
+                          Header="Get Details">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                            <RadioButton Content="Name wise"/>
+                            <RadioButton Content="ID wise"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="10,5,10,5" HorizontalAlignment="Center">
+                            <views:LabelWithTextbox Margin="2,4,2,2"/>
+                            <views:SaveCancelControl SaveButtonContent="Get" Margin="20,5,0,5"/>
+                        </StackPanel>
+                        <StackPanel Margin="10,5,10,5" HorizontalAlignment="Center">
+                            <views:LabelAndComboBox LabelContent="Select Id:" Height="30" />
+                        </StackPanel>
+                    </StackPanel>
+                </GroupBox>
+            </TabItem>
+            <TabItem Header="Delete" Name="DeleteTabItem">
+                <GroupBox Margin="15,10,15,10" 
+                          BorderBrush="Brown" 
+                          BorderThickness="1" 
+                          Header="Get Details">
+                    <StackPanel HorizontalAlignment="Center">
+                        <views:LabelAndComboBox LabelContent="Select Id:"/>
+                    </StackPanel>
+                </GroupBox>
+            </TabItem>
+        </TabControl>
+    </StackPanel>
+</Window>
