@@ -20,6 +20,7 @@
         <StackPanel Margin="10" 
                     Orientation="Horizontal" 
                     HorizontalAlignment="Center">
+            
             <StackPanel.Resources>
                 <Style TargetType="RadioButton">
                     <Setter Property="Margin" Value="4"/>
@@ -27,26 +28,35 @@
                     <Setter Property="FontWeight" Value="Normal"/>
                 </Style>
             </StackPanel.Resources>
+            
             <StackPanel.DataContext>
-                <viewModels:ViewSelectionViewModel/>
+                <viewModels:SelectionOptionViewModel/>
             </StackPanel.DataContext>
+            
             <RadioButton Content="Create" Name="Create" TabIndex="0"
                          Command="{Binding Path=ViewSelectionCommand}" CommandParameter="{Binding ElementName=Create,Path=Name}"/>
+            
             <RadioButton Content="Read" Name="Read" TabIndex="1"
                           Command="{Binding Path=ViewSelectionCommand}" CommandParameter="{Binding ElementName=Read,Path=Name}"/>
+            
             <RadioButton Content="Update" Name="Update" TabIndex="2"
                           Command="{Binding Path=ViewSelectionCommand}" CommandParameter="{Binding ElementName=Update,Path=Name}"/>
+            
             <RadioButton Content="Delete" Name="Delete" TabIndex="3"
                           Command="{Binding Path=ViewSelectionCommand}" CommandParameter="{Binding ElementName=Delete,Path=Name}"/>
+            
         </StackPanel>
 
         <TabControl x:Name="TabCrud" 
                     Height="Auto" 
                     Margin="10">
+            <TabControl.DataContext>
+                <viewModels:ViewSelectionViewModel/>
+            </TabControl.DataContext>
 
-            <TabItem Header="Save/Update" 
+            <TabItem Header="{Binding Path=HeaderName}" 
                      Name="CreateTabItem" 
-                     IsSelected="True">
+                     IsSelected="{Binding Path=IsCreateTabSelected}">
                 <GroupBox Margin="15,5,15,5" 
                           BorderBrush="Brown" 
                           BorderThickness="1" 
@@ -63,6 +73,7 @@
             </TabItem>
 
             <TabItem Header="Search"
+                     IsSelected="{Binding Path=IsReadTabSelected}"
                      Name="ReadTabItem">
                 <GroupBox Margin="15,5,15,5"
                           BorderBrush="Brown"
@@ -92,7 +103,9 @@
                 </GroupBox>
             </TabItem>
 
-            <TabItem Header="Delete" Name="DeleteTabItem">
+            <TabItem Header="Delete" 
+                     IsSelected="{Binding Path=IsDeleteTabSelected}"
+                     Name="DeleteTabItem">
                 <GroupBox Margin="15,10,15,10" 
                           BorderBrush="Brown" 
                           BorderThickness="1" 

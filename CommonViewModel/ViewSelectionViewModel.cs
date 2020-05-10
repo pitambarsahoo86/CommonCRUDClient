@@ -1,24 +1,29 @@
-﻿using System.Windows.Forms;
-
-namespace CommonViewModel
+﻿namespace CommonViewModel
 {
     public class ViewSelectionViewModel : ViewModelBase
     {
         public ViewSelectionViewModel()
         {
-            ViewSelectionCommand = new ComplexCommand(OnViewSelectionRequested, OnChanged);
+            // Subscribe event.
+            EventCommunicator.EventInstance.EventAggregator.GetEvent<ViewSelectionEvent>().Subscribe(OnViewSelected);
         }
 
-        public ComplexCommand ViewSelectionCommand { get; set; }
+        public bool IsCreateTabSelected { get; set; }
+        public bool IsReadTabSelected { get; set; }
+        public bool IsDeleteTabSelected { get; set; }
+        public string HeaderName { get; set; }
 
-        private bool OnChanged(object obj)
+        private void OnViewSelected(object viewName)
         {
-            return true;
-        }
+            IsCreateTabSelected = viewName.ToString().Equals("Create") || viewName.ToString().Equals("Update");
+            IsReadTabSelected = viewName.ToString().Equals("Read");
+            IsDeleteTabSelected = viewName.ToString().Equals("Delete");
+            HeaderName = viewName.ToString().Equals("Create") ? "Save" : "Update";
 
-        private void OnViewSelectionRequested(object viewName)
-        {
-            MessageBox.Show(viewName.ToString());
+            OnPropertyChanged("IsCreateTabSelected");
+            OnPropertyChanged("IsReadTabSelected");
+            OnPropertyChanged("IsDeleteTabSelected");
+            OnPropertyChanged("HeaderName");
         }
     }
 }
