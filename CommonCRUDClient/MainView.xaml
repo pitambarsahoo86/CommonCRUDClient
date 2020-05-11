@@ -3,71 +3,86 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:views="clr-namespace:CommonCRUDClient"
         xmlns:viewModels="clr-namespace:CommonViewModel;assembly=CommonViewModel"
-        Title="MainWindow" 
-        Height="380" 
-        Width="400" 
+        Title="MainWindow"
+        Height="380"
+        Width="400"
         ResizeMode="NoResize">
 
     <StackPanel Orientation="Vertical">
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Label Content="C R U D" 
-                   FontSize="20" 
-                   Foreground="CadetBlue" 
+            <Label Content="C R U D"
+                   FontSize="20"
+                   Foreground="CadetBlue"
                    FontWeight="Bold" />
         </StackPanel>
 
-        <StackPanel Margin="10" 
-                    Orientation="Horizontal" 
+        <StackPanel Margin="10"
+                    Orientation="Horizontal"
                     HorizontalAlignment="Center">
-            
+
             <StackPanel.Resources>
                 <Style TargetType="RadioButton">
-                    <Setter Property="Margin" Value="4"/>
-                    <Setter Property="Foreground" Value="Blue"/>
-                    <Setter Property="FontWeight" Value="Normal"/>
+                    <Setter Property="Margin" Value="4" />
+                    <Setter Property="Foreground" Value="Blue" />
+                    <Setter Property="FontWeight" Value="Normal" />
                 </Style>
             </StackPanel.Resources>
-            
+
             <StackPanel.DataContext>
-                <viewModels:SelectionOptionViewModel/>
+                <viewModels:SelectionOptionViewModel />
             </StackPanel.DataContext>
-            
+
             <RadioButton Content="Create" Name="Create" TabIndex="0"
-                         Command="{Binding Path=ViewSelectionCommand}" CommandParameter="{Binding ElementName=Create,Path=Name}"/>
-            
+                         Command="{Binding Path=ViewSelectionCommand}"
+                         CommandParameter="{Binding ElementName=Create,Path=Name}" />
+
             <RadioButton Content="Read" Name="Read" TabIndex="1"
-                          Command="{Binding Path=ViewSelectionCommand}" CommandParameter="{Binding ElementName=Read,Path=Name}"/>
-            
+                         Command="{Binding Path=ViewSelectionCommand}"
+                         CommandParameter="{Binding ElementName=Read,Path=Name}" />
+
             <RadioButton Content="Update" Name="Update" TabIndex="2"
-                          Command="{Binding Path=ViewSelectionCommand}" CommandParameter="{Binding ElementName=Update,Path=Name}"/>
-            
+                         Command="{Binding Path=ViewSelectionCommand}"
+                         CommandParameter="{Binding ElementName=Update,Path=Name}" />
+
             <RadioButton Content="Delete" Name="Delete" TabIndex="3"
-                          Command="{Binding Path=ViewSelectionCommand}" CommandParameter="{Binding ElementName=Delete,Path=Name}"/>
-            
+                         Command="{Binding Path=ViewSelectionCommand}"
+                         CommandParameter="{Binding ElementName=Delete,Path=Name}" />
+
         </StackPanel>
 
-        <TabControl x:Name="TabCrud" 
-                    Height="Auto" 
+        <TabControl x:Name="TabCrud"
+                    Height="Auto"
                     Margin="10">
             <TabControl.DataContext>
-                <viewModels:ViewSelectionViewModel/>
+                <viewModels:ViewSelectionViewModel />
             </TabControl.DataContext>
 
-            <TabItem Header="{Binding Path=HeaderName}" 
-                     Name="CreateTabItem" 
+            <TabItem Header="{Binding Path=HeaderName}"
+                     Name="CreateTabItem"
                      IsSelected="{Binding Path=IsCreateTabSelected}">
-                <GroupBox Margin="15,5,15,5" 
-                          BorderBrush="Brown" 
-                          BorderThickness="1" 
+                <GroupBox Margin="15,5,15,5"
+                          BorderBrush="Brown"
+                          BorderThickness="1"
                           Header="Save...">
                     <StackPanel Orientation="Vertical" Margin="10,5,10,5">
-                        <views:LabelWithTextbox LabelContent="Name" Margin="2,4,2,2"/>
-                        <views:LabelWithTextbox  Margin="2" LabelContent="Address"/>
-                        <views:LabelWithTextbox Margin="2" LabelContent="Email Id"/>
-                        <views:LabelWithTextbox Margin="2" LabelContent="Gender"/>
-                        <views:LabelWithTextbox Margin="2" LabelContent="Contact Number"/>
-                        <views:SaveCancelControl Margin="0,10,25,5"/>
+                        <views:LabelWithTextbox LabelContent="Name"
+                                                Margin="2,4,2,2"
+                                                TextBoxText="{Binding Path=SaveUpdateViewModel.Name}" />
+                        <views:LabelWithTextbox Margin="2"
+                                                LabelContent="Address"
+                                                TextBoxText="{Binding Path=SaveUpdateViewModel.Address}" />
+                        <views:LabelWithTextbox Margin="2"
+                                                LabelContent="Email Id"
+                                                TextBoxText="{Binding Path=SaveUpdateViewModel.Email}" />
+                        <views:LabelWithTextbox Margin="2"
+                                                LabelContent="Gender"
+                                                TextBoxText="{Binding Path=SaveUpdateViewModel.Gender}" />
+                        <views:LabelWithTextbox Margin="2"
+                                                LabelContent="Contact Number"
+                                                TextBoxText="{Binding Path=SaveUpdateViewModel.MobileNumber}" />
+                        <views:SaveCancelControl Margin="0,10,25,5" 
+                                                 SaveCommand="{Binding Path=SaveUpdateViewModel.SaveCommand}" />
                     </StackPanel>
                 </GroupBox>
             </TabItem>
@@ -77,41 +92,41 @@
                      Name="ReadTabItem">
                 <GroupBox Margin="15,5,15,5"
                           BorderBrush="Brown"
-                          BorderThickness="1" 
+                          BorderThickness="1"
                           Header="Search...">
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" 
-                                    HorizontalAlignment="Center" 
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Center"
                                     Margin="10">
-                            <RadioButton Content="Name wise"/>
-                            <RadioButton Content="ID wise"/>
+                            <RadioButton Content="Name wise" />
+                            <RadioButton Content="ID wise" />
                         </StackPanel>
                         <StackPanel Orientation="Vertical"
-                                    Margin="10,5,10,5" 
+                                    Margin="10,5,10,5"
                                     HorizontalAlignment="Center">
-                            <views:LabelWithTextbox Margin="2,4,2,2"/>
-                            <views:SaveCancelControl SaveButtonContent="Get" 
-                                                     Margin="20,5,0,5"/>
+                            <views:LabelWithTextbox Margin="2,4,2,2" />
+                            <views:SaveCancelControl SaveButtonContent="Get"
+                                                     Margin="20,5,0,5" />
                         </StackPanel>
-                        <StackPanel Margin="10,5,10,5" 
-                                    HorizontalAlignment="Center" 
+                        <StackPanel Margin="10,5,10,5"
+                                    HorizontalAlignment="Center"
                                     Visibility="Collapsed">
-                            <views:LabelAndComboBox LabelContent="Select Id:" 
+                            <views:LabelAndComboBox LabelContent="Select Id:"
                                                     Height="30" />
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
             </TabItem>
 
-            <TabItem Header="Delete" 
+            <TabItem Header="Delete"
                      IsSelected="{Binding Path=IsDeleteTabSelected}"
                      Name="DeleteTabItem">
-                <GroupBox Margin="15,10,15,10" 
-                          BorderBrush="Brown" 
-                          BorderThickness="1" 
+                <GroupBox Margin="15,10,15,10"
+                          BorderBrush="Brown"
+                          BorderThickness="1"
                           Header="Delete...">
                     <StackPanel HorizontalAlignment="Center">
-                        <views:LabelAndComboBox LabelContent="Select Id:"/>
+                        <views:LabelAndComboBox LabelContent="Select Id:" />
                     </StackPanel>
                 </GroupBox>
             </TabItem>

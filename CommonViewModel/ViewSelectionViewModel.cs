@@ -4,6 +4,8 @@
     {
         public ViewSelectionViewModel()
         {
+            SaveUpdateViewModel = new SaveUpdateViewModel();
+
             // Subscribe event.
             EventCommunicator.EventInstance.EventAggregator.GetEvent<ViewSelectionEvent>().Subscribe(OnViewSelected);
         }
@@ -12,6 +14,7 @@
         public bool IsReadTabSelected { get; set; }
         public bool IsDeleteTabSelected { get; set; }
         public string HeaderName { get; set; }
+        public SaveUpdateViewModel SaveUpdateViewModel { get; set; }
 
         private void OnViewSelected(object viewName)
         {

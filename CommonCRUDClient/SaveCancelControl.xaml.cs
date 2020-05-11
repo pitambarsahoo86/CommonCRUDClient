@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Input;
 
 namespace CommonCRUDClient
 {
@@ -12,9 +13,20 @@ namespace CommonCRUDClient
             DependencyProperty.Register("CancelButtonContent", typeof (string), typeof (SaveCancelControl),
                 new PropertyMetadata(OnCancelButtonContentChanged));
 
+        public static readonly DependencyProperty SaveCommandProperty =
+            DependencyProperty.Register("SaveCommand", typeof (ICommand), typeof (SaveCancelControl));
+
+
         public SaveCancelControl()
         {
             InitializeComponent();
+            DataContext = this;
+        }
+
+        public ICommand SaveCommand
+        {
+            get { return (ICommand) GetValue(SaveCommandProperty); }
+            set { SetValue(SaveCommandProperty, value); }
         }
 
         public string SaveButtonContent
