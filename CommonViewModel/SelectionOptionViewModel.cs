@@ -4,15 +4,10 @@
     {
         public SelectionOptionViewModel()
         {
-            ViewSelectionCommand = new ComplexCommand(OnOptionSelected, OnChanged);
+            ViewSelectionCommand = new ComplexCommand(OnOptionSelected, canExecute=>true);
         }
 
         public ComplexCommand ViewSelectionCommand { get; set; }
-
-        private bool OnChanged(object obj)
-        {
-            return true;
-        }
 
         private void OnOptionSelected(object viewName)
         {
