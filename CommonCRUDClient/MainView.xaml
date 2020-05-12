@@ -82,7 +82,8 @@
                                                 LabelContent="Contact Number"
                                                 TextBoxText="{Binding Path=SaveUpdateViewModel.MobileNumber}" />
                         <views:SaveCancelControl Margin="0,10,25,5" 
-                                                 SaveCommand="{Binding Path=SaveUpdateViewModel.SaveCommand}" />
+                                                 SaveCommand="{Binding Path=SaveUpdateViewModel.SaveCommand}"
+                                                 ClearCommand="{Binding Path=SaveUpdateViewModel.ClearCommand}"/>
                     </StackPanel>
                 </GroupBox>
             </TabItem>

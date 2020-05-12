@@ -16,11 +16,19 @@ namespace CommonCRUDClient
         public static readonly DependencyProperty SaveCommandProperty =
             DependencyProperty.Register("SaveCommand", typeof (ICommand), typeof (SaveCancelControl));
 
+        public static readonly DependencyProperty ClearCommandProperty =
+            DependencyProperty.Register("ClearCommand", typeof (ICommand), typeof (SaveCancelControl));
+
 
         public SaveCancelControl()
         {
             InitializeComponent();
-            DataContext = this;
+        }
+
+        public ICommand ClearCommand
+        {
+            get { return (ICommand) GetValue(ClearCommandProperty); }
+            set { SetValue(ClearCommandProperty, value); }
         }
 
         public ICommand SaveCommand

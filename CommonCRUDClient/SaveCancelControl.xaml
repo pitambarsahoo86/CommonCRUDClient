@@ -1,30 +1,24 @@
 ﻿<UserControl x:Class="CommonCRUDClient.SaveCancelControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:lib="clr-namespace:CommonCRUDClient"
-             Height="Auto" Width="Auto">
-    <StackPanel Orientation="Horizontal" 
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center"
-                DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type lib:SaveCancelControl}}}">
-        <Button Height="23" 
-                FontSize="10" 
-                Width="60" 
-                Content="Save" 
-                x:Name="BtnSave" 
-                Command="{Binding SaveCommand}"/>
-        
-        <Button Height="23" 
-                FontSize="10" 
-                Width="60" 
-                Content="Clear" 
-                x:Name="BtnClear"/>
+             Height="Auto"
+             Width="Auto"
+             Name="ControlRoot">
+    <StackPanel Orientation="Horizontal"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+        <Button Height="23"
+                FontSize="10"
+                Width="60"
+                Content="Save"
+                x:Name="BtnSave"
+                Command="{Binding SaveCommand,ElementName=ControlRoot}" />
+
+        <Button Height="23"
+                FontSize="10"
+                Width="60"
+                Content="Clear"
+                Command="{Binding ClearCommand,ElementName=ControlRoot}"
+                x:Name="BtnClear" />
     </StackPanel>
 </UserControl>
-
-
-<!--<Grid DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type UserControl}}}">
-
-    <Button Command="{Binding Command}" />
-
-</Grid>-->
